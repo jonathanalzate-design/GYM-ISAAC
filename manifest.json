@@ -1,6 +1,6 @@
 {
-  "name": "Plan de Entrenamiento",
-  "short_name": "Mi Entreno",
+  "name": "Gym Isaac",
+  "short_name": "Gym Isaac",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
