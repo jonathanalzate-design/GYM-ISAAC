@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Gym Isaac</title>
+<link rel="manifest" href="manifest.json">
+
+<!-- PWA / home screen behavior -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Gym Isaac">
+<meta name="theme-color" content="#0b0f14">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<style>
+  :root{--bg:#0b0f14;--card:#131922;--card2:#1a2230;--text:#eef2f6;--muted:#8b96a8;--accent:#ff3d6e;--border:#262e3d;
+        --s1:#38bdf8;--s2:#a78bfa;--s3:#fb7185;--s4:#fbbf24;--ok:#5eead4}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  .headrow{display:flex;justify-content:space-between;align-items:flex-start}
+  .themebtn{background:var(--card2);border:1px solid var(--border);border-radius:10px;width:38px;height:38px;font-size:16px;cursor:pointer;margin-top:14px}
+  .themepanel{display:none;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px;margin-bottom:10px}
+  .themepanel.open{display:flex}
+  .theme-swatch{width:32px;height:32px;border-radius:50%;cursor:pointer;border:2px solid transparent}
+  .theme-swatch.active{border-color:var(--text)}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:0 auto;padding:env(safe-area-inset-top) 14px calc(60px + env(safe-area-inset-bottom))}
+  h1{font-size:18px;margin:14px 0 2px}
+  .subtitle{color:var(--muted);font-size:12.5px;margin-bottom:14px}
+
+  .weekbar{position:sticky;top:0;z-index:20;background:var(--bg);padding:calc(10px + env(safe-area-inset-top)) 0 8px;border-bottom:1px solid var(--border)}
+  .weekbar .lbl{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+  .weekseg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .weekbtn{border:1px solid var(--border);background:var(--card2);color:var(--text);border-radius:10px;padding:8px 4px;font-size:12px;font-weight:700;cursor:pointer;text-align:center}
+  .weekbtn .wn{display:block;font-size:13px}
+  .weekbtn .wl{display:block;font-size:8.5px;font-weight:600;color:var(--muted);margin-top:1px}
+  .weekbtn.active.s1{background:var(--s1);border-color:var(--s1);color:#fff}
+  .weekbtn.active.s2{background:var(--s2);border-color:var(--s2);color:#fff}
+  .weekbtn.active.s3{background:var(--s3);border-color:var(--s3);color:#fff}
+  .weekbtn.active.s4{background:var(--s4);border-color:var(--s4);color:#fff}
+  .weekbtn.active .wl{color:rgba(255,255,255,.85)}
+
+  .tabbar{position:sticky;top:64px;z-index:19;display:flex;gap:6px;overflow-x:auto;padding:10px 0;background:var(--bg);border-bottom:1px solid var(--border);margin-bottom:14px;-webkit-overflow-scrolling:touch}
+  .tabbtn{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;background:var(--card2);border:1px solid var(--border);color:var(--muted);font-size:11px;font-weight:700;padding:7px 14px;border-radius:14px;cursor:pointer;white-space:nowrap;line-height:1.3}
+  .tabbtn .n{font-size:15px}
+  .tabbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+  .daypanel{display:none}
+  .daypanel.active{display:block}
+  .daytitle{font-size:16px;font-weight:700;margin:2px 0 4px;text-align:center}
+
+  .daysummary{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 12px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .daysummary .ds-txt{font-size:12px;color:var(--muted)}
+  .daysummary .ds-num{font-size:15px;font-weight:800;color:var(--text)}
+  .progressring{width:38px;height:38px;flex-shrink:0}
+  .resetbtn{background:none;border:1px solid var(--border);color:var(--muted);font-size:10.5px;border-radius:8px;padding:5px 8px;cursor:pointer}
+
+  .bl{color:var(--accent);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin:14px 0 4px}
+
+  .exblock{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:11px 12px;margin-bottom:10px;transition:border-color .2s}
+  .exblock.done{border-color:var(--ok)}
+  .exhead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+  .exname{font-size:13px;font-weight:600}
+  .exname .check{color:var(--ok);margin-right:4px;display:none}
+  .exblock.done .exname .check{display:inline}
+  .exvideo{flex-shrink:0;background:var(--accent);color:#fff;font-size:11px;font-weight:700;text-decoration:none;padding:6px 9px;border-radius:8px;white-space:nowrap}
+  .extip{display:flex;gap:8px;align-items:center;font-size:11px;color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:7px 8px;margin-bottom:9px;line-height:1.4}
+  .extip-diagram{flex-shrink:0;width:44px;height:44px;background:var(--card2);border-radius:8px}
+  .extip-diagram svg{width:100%;height:100%}
+  .extip-text{flex:1}
+
+  .wkchips{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:10px}
+  .chip{border-radius:8px;padding:5px 2px;text-align:center;color:#fff;opacity:.45;border:2px solid transparent}
+  .chip.current{opacity:1;border-color:rgba(255,255,255,.55)}
+  .chip .cs{font-size:9px;opacity:.85;font-weight:700}
+  .chip .cv{font-size:10.5px;font-weight:700;margin-top:1px}
+  .chip .cr{font-size:8.5px;opacity:.8;margin-top:1px}
+  .chip.s1{background:var(--s1)} .chip.s2{background:var(--s2)} .chip.s3{background:var(--s3)} .chip.s4{background:var(--s4)}
+
+  .tracker{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:9px 10px}
+  .tracker-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:10.5px;color:var(--muted)}
+  .weightrow{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+  .weightrow label{font-size:11px;color:var(--muted);white-space:nowrap}
+  .weightrow input{width:72px;background:var(--card2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:6px 8px;font-size:13px;font-weight:700}
+  .weightrow input.suggested{color:var(--muted);font-weight:600;font-style:italic}
+  .weightrow .unit{font-size:11px;color:var(--muted)}
+  .suggest-tag{font-size:9.5px;background:rgba(255,122,0,.15);color:var(--accent);padding:2px 6px;border-radius:6px;font-weight:700}
+  .suggest-tag-btn{border:none;cursor:pointer;font-size:10.5px;padding:5px 9px}
+
+  .setpills{display:flex;gap:6px;flex-wrap:wrap}
+  .setpill{flex:1;min-width:52px;border:1px solid var(--border);background:var(--card2);color:var(--muted);border-radius:8px;padding:8px 4px;text-align:center;font-size:11px;font-weight:700;cursor:pointer;user-select:none}
+  .setpill .pn{display:block;font-size:9px;opacity:.8}
+  .setpill.on{background:var(--ok);border-color:var(--ok);color:#fff}
+
+  .restbox{margin-top:9px;display:flex;align-items:center;justify-content:space-between;gap:8px;background:rgba(167,139,250,.12);border:1px solid var(--s2);border-radius:9px;padding:8px 10px;font-size:12px;font-weight:700;color:var(--s2)}
+  .resttime{font-variant-numeric:tabular-nums}
+  .restcancel{background:none;border:1px solid var(--s2);color:var(--s2);font-size:10.5px;font-weight:700;border-radius:7px;padding:5px 9px;cursor:pointer}
+  .reststart{margin-top:9px;width:100%;background:none;border:1px dashed var(--border);color:var(--muted);font-size:11.5px;font-weight:700;border-radius:9px;padding:8px;cursor:pointer}
+
+  .cardio-strip{margin-top:10px;padding:10px 11px;background:#0b1f1c;border:1px solid #164a43;color:#5eead4;border-radius:10px;font-size:11.5px}
+  .cardio-strip.on{background:#0f3d37;border-color:var(--ok)}
+  .cardio-title{font-weight:700;margin-bottom:2px;display:flex;align-items:center;justify-content:space-between;gap:6px}
+  .cardio-detail{font-size:11px;opacity:.9;margin-bottom:8px}
+  .cardio-toggle{background:none;border:1px solid #164a43;color:#5eead4;font-size:10.5px;font-weight:700;border-radius:8px;padding:6px 10px;cursor:pointer;white-space:nowrap}
+  .cardio-toggle.on{background:var(--ok);border-color:var(--ok);color:#fff}
+
+  footer{text-align:center;color:var(--muted);font-size:10.5px;margin-top:20px;line-height:1.6}
+
+  .bodylog{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:14px}
+  .bodylog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+  .bodylog-title{font-size:13px;font-weight:700}
+  .bodylog-sub{font-size:10.5px;color:var(--muted);margin-bottom:10px}
+  .addbtn{background:var(--accent);color:#fff;border:none;font-size:11px;font-weight:700;border-radius:8px;padding:7px 10px;cursor:pointer;white-space:nowrap}
+  .bodyform{display:none;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;margin-bottom:4px}
+  .bodyform.open{display:grid}
+  .bodyform .field{display:flex;flex-direction:column;gap:3px}
+  .bodyform .field.full{grid-column:1/3}
+  .bodyform label{font-size:10px;color:var(--muted)}
+  .bodyform input{background:var(--card2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:7px 8px;font-size:13px}
+  .bodyform .savebtn{grid-column:1/3;background:var(--ok);color:#fff;border:none;font-size:12px;font-weight:700;border-radius:8px;padding:9px;cursor:pointer;margin-top:2px}
+
+  .bodystats{display:flex;gap:8px;margin-top:10px}
+  .bstat{flex:1;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:8px 6px;text-align:center}
+  .bstat .lbl{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-bottom:3px}
+  .bstat .val{font-size:12.5px;font-weight:700}
+  .bstat .delta{font-size:10.5px;font-weight:700;margin-top:2px}
+  .bstat .spark{width:100%;height:20px;margin-top:4px}
+  .good{color:#5eead4}
+  .bad{color:#fb7185}
+  .flat{color:var(--muted)}
+
+  .bodyhist{margin-top:10px;border-top:1px solid var(--border);padding-top:8px}
+  .bodyhist-row{display:flex;justify-content:space-between;align-items:center;font-size:11px;padding:6px 0;border-bottom:1px solid var(--border)}
+  .bodyhist-row:last-child{border-bottom:none}
+  .bodyhist-date{color:var(--muted)}
+  .bodyhist-vals{display:flex;gap:10px;font-weight:600}
+  .bodyhist-empty{font-size:11.5px;color:var(--muted);text-align:center;padding:6px 0}
+  .delrow{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;padding:0 2px}
+  .viewfile{background:none;border:none;font-size:14px;cursor:pointer;padding:0 4px}
+
+  .fileviewer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
+  .fileviewer-box{position:relative;width:100%;max-width:600px;max-height:90vh;display:flex;flex-direction:column;align-items:center;gap:10px}
+  .fileviewer-close{align-self:flex-end;background:var(--card2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer}
+  .fileviewer-img{max-width:100%;max-height:80vh;border-radius:10px;object-fit:contain}
+  .fileviewer-pdf{width:100%;height:80vh;border-radius:10px;border:none}
+</style>
+</head>
+<body>
+  <div class="headrow">
+    <div>
+      <h1>💪 Plan de Entrenamiento</h1>
+    </div>
+    <button class="themebtn" id="themeBtn">🎨</button>
+  </div>
+  <div class="themepanel" id="themePanel">
+    <span class="theme-swatch" data-theme="coral" style="background:#ff3d6e"></span>
+    <span class="theme-swatch" data-theme="lima" style="background:#84cc16"></span>
+    <span class="theme-swatch" data-theme="azul" style="background:#3b82f6"></span>
+    <span class="theme-swatch" data-theme="purpura" style="background:#a855f7"></span>
+  </div>
+  <div class="subtitle">Objetivo: perder grasa preservando músculo · Registra tu peso y marca cada serie</div>
+
+  <div class="bodylog" id="bodylog"></div>
+
+  <div class="weekbar">
+    <div class="lbl">Semana activa</div>
+    <div class="weekseg" id="weekseg"></div>
+  </div>
+
+  <div class="tabbar" id="tabbar"></div>
+  <div id="daypanels"></div>
+
+  <footer>Los pesos de S2–S4 son sugerencias calculadas a partir de tu peso en S1 (progresión, intensidad y descarga). Ajústalos siempre según cómo te sientas ese día — tú tienes la última palabra.<br>Cada vez que te hagas el examen de bioimpedancia, regístralo arriba y comparte los números en el chat para que ajustemos el plan juntos.<br>📴 Tus pesos y series marcadas se guardan en tu propio celular, así que funcionan sin señal ni Wi-Fi. Solo el botón "▶ Video" necesita internet — cada ejercicio tiene además un tip de forma (📴) que puedes leer sin conexión.<br>⏱ Al marcar una serie se inicia solo el descanso, con un sonido suave (y vibración) cuando termine. Si tu celular está en silencio, sentirás la vibración igual.</footer>
+
+<script>
+const PLAN = [{"id":"d1","name":"DÍA 1 · Superior Empuje","exercises":[{"name":"Press banca con mancuerna","video":"https://www.youtube.com/results?search_query=press+banca+con+mancuerna+t%C3%A9cnica+correcta","group":null,"weeks":[{"week":"S1","scheme":"4x10-12","rest":"120s"},{"week":"S2","scheme":"4x10","rest":"120s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"120s"},{"week":"S4","scheme":"3x10-12","rest":"90-120s"}],"tip":"Escápulas juntas, baja las mancuernas a la altura del pecho con codos a 45°, empuja sin arquear en exceso la espalda.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"26\" y2=\"34\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"34\" x2=\"26\" y2=\"20\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"20\" x2=\"26\" y2=\"8\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"54\" y2=\"34\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"34\" x2=\"54\" y2=\"20\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"20\" x2=\"54\" y2=\"8\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"A1. Press inclinado con mancuerna","video":"https://www.youtube.com/results?search_query=press+inclinado+con+mancuerna+t%C3%A9cnica+correcta","group":"Biserie 1","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Banco a 30-45°, baja controlado hasta sentir estiramiento en el pecho, sube sin chocar las mancuernas arriba.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"26\" y2=\"36\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"36\" x2=\"20\" y2=\"24\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"20\" y1=\"24\" x2=\"12\" y2=\"12\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"54\" y2=\"36\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"36\" x2=\"60\" y2=\"24\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"60\" y1=\"24\" x2=\"68\" y2=\"12\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"A2. Press militar con mancuerna","video":"https://www.youtube.com/results?search_query=press+militar+con+mancuerna+sentado+t%C3%A9cnica+correcta","group":"Biserie 1","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Core apretado, empuja las mancuernas hacia arriba sin arquear la espalda baja, controla la bajada.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"28\" y2=\"32\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"28\" y1=\"32\" x2=\"26\" y2=\"18\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"18\" x2=\"26\" y2=\"6\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"52\" y2=\"32\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"52\" y1=\"32\" x2=\"54\" y2=\"18\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"18\" x2=\"54\" y2=\"6\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"B1. Apertura en máquina (pec deck)","video":"https://www.youtube.com/results?search_query=apertura+en+maquina+pec+deck+t%C3%A9cnica+correcta","group":"Biserie 2","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Codos ligeramente flexionados, junta los brazos al frente sin encoger los hombros, controla la vuelta.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"20\" y2=\"20\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"20\" y1=\"20\" x2=\"40\" y2=\"10\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"60\" y2=\"20\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"60\" y1=\"20\" x2=\"40\" y2=\"10\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"B2. Elevaciones laterales con mancuerna","video":"https://www.youtube.com/results?search_query=elevaciones+laterales+con+mancuerna+hombro+t%C3%A9cnica+correcta","group":"Biserie 2","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Codos ligeramente flexionados, sube hasta la altura del hombro sin encogerlos, controla la bajada.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"58\" y2=\"26\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"58\" y1=\"26\" x2=\"64\" y2=\"16\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"22\" y2=\"26\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"22\" y1=\"26\" x2=\"16\" y2=\"16\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"C1. Extensión de tríceps en polea (copa)","video":"https://www.youtube.com/results?search_query=extension+de+triceps+en+polea+cuerda+copa+t%C3%A9cnica+correcta","group":"Biserie 3","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Codos pegados al torso, extiende solo desde el codo, controla la vuelta sin soltar de golpe.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"50\" y2=\"32\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"32\" x2=\"50\" y2=\"50\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"32\" x2=\"50\" y2=\"54\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"C2. Extensión de tríceps trasnuca con mancuerna","video":"https://www.youtube.com/results?search_query=extension+de+triceps+trasnuca+con+mancuerna+t%C3%A9cnica+correcta","group":"Biserie 3","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Codos apuntando al frente y fijos, baja la mancuerna detrás de la cabeza sin abrir los codos, extiende completo.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"50\" y2=\"14\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"14\" x2=\"58\" y2=\"26\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"58\" y1=\"26\" x2=\"64\" y2=\"38\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"Press banca con barra","video":"https://www.youtube.com/results?search_query=press%20banca%20con%20barra%20t%C3%A9cnica%20correcta","group":null,"weeks":[{"week":"S1","scheme":"4x10-12","rest":"120s"},{"week":"S2","scheme":"4x10","rest":"120s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"120s"},{"week":"S4","scheme":"3x10-12","rest":"90-120s"}],"tip":"Escápulas retraídas y pecho arriba, baja la barra al pecho con control, empuja sin despegar los glúteos del banco.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"26\" y2=\"34\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"34\" x2=\"26\" y2=\"20\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"20\" x2=\"26\" y2=\"8\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"54\" y2=\"34\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"34\" x2=\"54\" y2=\"20\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"20\" x2=\"54\" y2=\"8\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"}],"cardio":{"title":"🏃 HIIT caminadora","weeks":[{"week":"S1","detail":"25 min · 30/30 s"},{"week":"S2","detail":"30 min · 30/30 s"},{"week":"S3","detail":"30 min · 40/20 s"},{"week":"S4","detail":"30 min · constante"}]}},{"id":"d2","name":"DÍA 2 · Inferior Rodilla","exercises":[{"name":"A1. Prensa inclinada","video":"https://www.youtube.com/results?search_query=prensa+inclinada+45+grados+piernas+t%C3%A9cnica+correcta","group":"Biserie 1","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Pies a la altura de los hombros, baja hasta 90° sin despegar la zona lumbar del respaldo, empuja sin trabar rodillas.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"30\" cy=\"30\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"30\" y1=\"36\" x2=\"30\" y2=\"52\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"14\" y=\"52\" width=\"32\" height=\"8\" rx=\"3\" stroke=\"#5a6376\" stroke-width=\"2.5\" fill=\"none\"/><line x1=\"30\" y1=\"52\" x2=\"46\" y2=\"38\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"46\" y1=\"38\" x2=\"60\" y2=\"38\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"46\" y1=\"38\" x2=\"64\" y2=\"38\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"A2. Zancada estática con mancuerna","video":"https://www.youtube.com/results?search_query=zancada+estatica+con+mancuerna+t%C3%A9cnica+correcta","group":"Biserie 1","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Paso amplio, baja hasta que ambas rodillas queden cerca de 90°, tronco erguido, empuja con el talón delantero.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"26\" y2=\"62\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"62\" x2=\"20\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"52\" y2=\"56\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"52\" y1=\"56\" x2=\"58\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"40\" y2=\"56\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"Pantorrilla en máquina","video":"https://www.youtube.com/results?search_query=pantorrilla+en+maquina+gemelos+t%C3%A9cnica+correcta","group":"Biserie 1","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Rango completo, pausa arriba en la punta del pie y baja controlado sin rebotar.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"34\" y2=\"62\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"34\" y1=\"62\" x2=\"34\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"46\" y2=\"62\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"46\" y1=\"62\" x2=\"46\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"66\" x2=\"40\" y2=\"54\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"B1. Extensión de cuádriceps","video":"https://www.youtube.com/results?search_query=extension+de+cuadriceps+en+maquina+t%C3%A9cnica+correcta","group":"Biserie 2","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Espalda pegada al respaldo, extiende sin bloquear de golpe la rodilla, baja controlado.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"26\" cy=\"20\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"26\" x2=\"26\" y2=\"44\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"12\" y=\"44\" width=\"28\" height=\"10\" rx=\"3\" stroke=\"#5a6376\" stroke-width=\"2.5\" fill=\"none\"/><line x1=\"26\" y1=\"44\" x2=\"40\" y2=\"44\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"44\" x2=\"58\" y2=\"32\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"B2. Sentadilla Goblet","video":"https://www.youtube.com/results?search_query=sentadilla+goblet+con+mancuerna+t%C3%A9cnica+correcta","group":"Biserie 2","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Sostén la mancuerna pegada al pecho, baja entre las piernas manteniendo el torso erguido.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"26\" y2=\"58\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"58\" x2=\"30\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"54\" y2=\"58\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"58\" x2=\"50\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"40\" y2=\"58\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"20\" y1=\"44\" x2=\"60\" y2=\"44\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"},{"name":"C1. Aducción en máquina","video":"https://www.youtube.com/results?search_query=aduccion+de+cadera+en+maquina+t%C3%A9cnica+correcta","group":"Biserie 3","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Espalda pegada al respaldo, junta las piernas contra la resistencia de forma controlada.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"16\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"22\" x2=\"40\" y2=\"42\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"26\" y=\"42\" width=\"28\" height=\"8\" rx=\"3\" stroke=\"#5a6376\" stroke-width=\"2.5\" fill=\"none\"/><line x1=\"40\" y1=\"42\" x2=\"30\" y2=\"58\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"42\" x2=\"50\" y2=\"58\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"30\" y1=\"50\" x2=\"38\" y2=\"54\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"50\" y1=\"50\" x2=\"42\" y2=\"54\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"C2. Sentadilla isométrica","video":"https://www.youtube.com/results?search_query=sentadilla+isometrica+en+pared+wall+sit+t%C3%A9cnica+correcta","group":"Biserie 3","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Mantén la posición con rodillas a 90°, espalda recta y peso en los talones durante todo el tiempo indicado.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"26\" y2=\"58\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"58\" x2=\"30\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"54\" y2=\"58\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"58\" x2=\"50\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"40\" y=\"60\" font-size=\"14\" text-anchor=\"middle\" fill=\"#a78bfa\">⏱</text></svg>"},{"name":"Sentadilla con desplazamiento lateral","video":"https://www.youtube.com/results?search_query=sentadilla%20con%20desplazamiento%20lateral%20t%C3%A9cnica%20correcta","group":null,"weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Paso amplio hacia el lado flexionando esa rodilla mientras la otra pierna queda extendida, pecho arriba y peso en el talón de apoyo.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"26\" y2=\"58\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"58\" x2=\"30\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"54\" y2=\"58\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"58\" x2=\"50\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"40\" y2=\"58\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"20\" y1=\"44\" x2=\"60\" y2=\"44\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"}],"cardio":{"title":"🏃 HIIT caminadora","weeks":[{"week":"S1","detail":"25 min · 30/30 s"},{"week":"S2","detail":"30 min · 30/30 s"},{"week":"S3","detail":"30 min · 40/20 s"},{"week":"S4","detail":"30 min · constante"}]}},{"id":"d3","name":"DÍA 3 · Superior Tirón","exercises":[{"name":"Apertura posterior en máquina","video":"https://www.youtube.com/results?search_query=apertura+posterior+en+maquina+deltoide+posterior+t%C3%A9cnica+correcta","group":null,"weeks":[{"week":"S1","scheme":"4x10-12","rest":"120s"},{"week":"S2","scheme":"4x10","rest":"120s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"120s"},{"week":"S4","scheme":"3x10-12","rest":"90-120s"}],"tip":"Espalda recta, abre los brazos llevando los codos hacia atrás, enfócate en apretar entre los omóplatos.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"58\" y2=\"30\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"58\" y1=\"30\" x2=\"70\" y2=\"20\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"22\" y2=\"30\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"22\" y1=\"30\" x2=\"10\" y2=\"20\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"A1. Jalón al pecho agarre abierto","video":"https://www.youtube.com/results?search_query=jalon+al+pecho+agarre+abierto+t%C3%A9cnica+correcta","group":"Biserie 1","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Pecho arriba, lleva la barra hacia la parte alta del pecho llevando los codos hacia abajo y atrás, sin balancearte.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"26\" y2=\"14\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"14\" x2=\"20\" y2=\"4\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"54\" y2=\"14\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"14\" x2=\"60\" y2=\"4\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"30\" y2=\"40\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"50\" y2=\"40\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"},{"name":"A2. Remo en máquina","video":"https://www.youtube.com/results?search_query=remo+en+maquina+sentado+t%C3%A9cnica+correcta","group":"Biserie 1","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Pecho contra el soporte, tira llevando los codos atrás y juntando escápulas, evita usar impulso de la espalda.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"58\" y2=\"26\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"58\" y1=\"26\" x2=\"68\" y2=\"26\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"44\" y2=\"42\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"36\" y2=\"42\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"},{"name":"B1. Curl de bíceps con barra","video":"https://www.youtube.com/results?search_query=curl+de+biceps+con+barra+t%C3%A9cnica+correcta","group":"Biserie 2","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Codos pegados al torso, sube sin balancear la espalda, controla la bajada completa.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"50\" y2=\"44\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"44\" x2=\"50\" y2=\"30\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"44\" x2=\"50\" y2=\"26\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"B2. Crunch abdominal, elevación de piernas flexionadas","video":"https://www.youtube.com/results?search_query=crunch+abdominal+elevacion+de+piernas+flexionadas+t%C3%A9cnica+correcta","group":"Biserie 2","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Lumbar pegada al piso, sube las rodillas hacia el pecho contrayendo el abdomen, evita usar impulso.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"20\" cy=\"44\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"20\" y1=\"44\" x2=\"40\" y2=\"44\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"38\" y=\"50\" width=\"26\" height=\"8\" rx=\"3\" stroke=\"#5a6376\" stroke-width=\"2.5\" fill=\"none\"/><line x1=\"40\" y1=\"44\" x2=\"50\" y2=\"30\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"30\" x2=\"58\" y2=\"20\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"C1. Curl de bíceps con mancuerna (martillo)","video":"https://www.youtube.com/results?search_query=curl+martillo+con+mancuerna+biceps+t%C3%A9cnica+correcta","group":"Biserie 3","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Agarre neutro (pulgar arriba), codos fijos al torso, sube sin balancear el cuerpo.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"50\" y2=\"44\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"44\" x2=\"50\" y2=\"30\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"44\" x2=\"50\" y2=\"26\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"C2. Crunch abdominal, elevación de piernas","video":"https://www.youtube.com/results?search_query=crunch+abdominal+elevacion+de+piernas+t%C3%A9cnica+correcta","group":"Biserie 3","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Lumbar pegada al piso, eleva las piernas con control usando el abdomen, evita balancear.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"20\" cy=\"44\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"20\" y1=\"44\" x2=\"40\" y2=\"44\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"38\" y=\"50\" width=\"26\" height=\"8\" rx=\"3\" stroke=\"#5a6376\" stroke-width=\"2.5\" fill=\"none\"/><line x1=\"40\" y1=\"44\" x2=\"50\" y2=\"30\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"30\" x2=\"58\" y2=\"20\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"}],"cardio":{"title":"🏃 HIIT caminadora","weeks":[{"week":"S1","detail":"25 min · 30/30 s"},{"week":"S2","detail":"30 min · 30/30 s"},{"week":"S3","detail":"30 min · 40/20 s"},{"week":"S4","detail":"30 min · constante"}]}},{"id":"d4","name":"DÍA 4 · Inferior Cadera","exercises":[{"name":"A1. Curl femoral sentado","video":"https://www.youtube.com/results?search_query=curl+femoral+sentado+en+maquina+t%C3%A9cnica+correcta","group":"Biserie 1","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Espalda pegada al respaldo, flexiona solo desde la rodilla, controla la vuelta sin soltar de golpe.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"26\" cy=\"20\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"26\" x2=\"26\" y2=\"44\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"12\" y=\"44\" width=\"28\" height=\"10\" rx=\"3\" stroke=\"#5a6376\" stroke-width=\"2.5\" fill=\"none\"/><line x1=\"26\" y1=\"44\" x2=\"50\" y2=\"44\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"44\" x2=\"50\" y2=\"60\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"A2. Sentadilla Sumo","video":"https://www.youtube.com/results?search_query=sentadilla+sumo+con+mancuerna+t%C3%A9cnica+correcta","group":"Biserie 1","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Pies más anchos que los hombros, puntas afuera, baja manteniendo el pecho arriba y rodillas en línea con los pies.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"26\" y2=\"58\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"58\" x2=\"30\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"54\" y2=\"58\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"58\" x2=\"50\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"40\" y2=\"58\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"20\" y1=\"44\" x2=\"60\" y2=\"44\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"},{"name":"B1. Pantorrilla en prensa","video":"https://www.youtube.com/results?search_query=pantorrilla+en+prensa+de+piernas+t%C3%A9cnica+correcta","group":"Biserie 2","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Empuja solo con la punta del pie en un rango completo, pausa arriba y baja controlado.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"34\" y2=\"62\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"34\" y1=\"62\" x2=\"34\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"46\" y2=\"62\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"46\" y1=\"62\" x2=\"46\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"66\" x2=\"40\" y2=\"54\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"B2. Extensión de cadera en máquina (patada de glúteo)","video":"https://www.youtube.com/results?search_query=patada+de+gluteo+en+maquina+extension+de+cadera+t%C3%A9cnica+correcta","group":"Biserie 2","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Tronco estable, empuja con el talón llevando la pierna atrás, aprieta el glúteo arriba sin arquear la espalda.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"24\" cy=\"20\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"24\" y1=\"26\" x2=\"24\" y2=\"44\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"10\" y=\"40\" width=\"20\" height=\"8\" rx=\"3\" stroke=\"#5a6376\" stroke-width=\"2.5\" fill=\"none\"/><line x1=\"24\" y1=\"44\" x2=\"24\" y2=\"58\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"24\" y1=\"58\" x2=\"42\" y2=\"58\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"C1. Abducción en máquina","video":"https://www.youtube.com/results?search_query=abduccion+de+cadera+en+maquina+gluteo+medio+t%C3%A9cnica+correcta","group":"Biserie 3","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Espalda pegada al respaldo, separa las piernas contra la resistencia sin impulsarte con el tronco.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"16\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"22\" x2=\"40\" y2=\"42\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"26\" y=\"42\" width=\"28\" height=\"8\" rx=\"3\" stroke=\"#5a6376\" stroke-width=\"2.5\" fill=\"none\"/><line x1=\"40\" y1=\"42\" x2=\"34\" y2=\"58\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"42\" x2=\"46\" y2=\"58\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"34\" y1=\"50\" x2=\"24\" y2=\"54\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"46\" y1=\"50\" x2=\"56\" y2=\"54\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"C2. Curl femoral acostado","video":"https://www.youtube.com/results?search_query=curl+femoral+acostado+en+maquina+t%C3%A9cnica+correcta","group":"Biserie 3","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Cadera pegada al banco, flexiona desde la rodilla sin levantar la pelvis, controla la bajada.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"16\" cy=\"30\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"16\" y1=\"30\" x2=\"42\" y2=\"30\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"10\" y=\"32\" width=\"44\" height=\"8\" rx=\"3\" stroke=\"#5a6376\" stroke-width=\"2.5\" fill=\"none\"/><line x1=\"42\" y1=\"30\" x2=\"58\" y2=\"30\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"58\" y1=\"30\" x2=\"58\" y2=\"14\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"Peso muerto con barra","video":"https://www.youtube.com/results?search_query=peso%20muerto%20con%20barra%20t%C3%A9cnica%20correcta","group":null,"weeks":[{"week":"S1","scheme":"4x10-12","rest":"120s"},{"week":"S2","scheme":"4x10","rest":"120s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"120s"},{"week":"S4","scheme":"3x10-12","rest":"90-120s"}],"tip":"Espalda neutra en todo momento, empuja el piso con los talones y lleva la cadera hacia adelante al subir, la barra pegada a las piernas.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah2\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"44\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"44\" y1=\"20\" x2=\"30\" y2=\"42\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"30\" y1=\"42\" x2=\"24\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"30\" y1=\"42\" x2=\"38\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"36\" y1=\"28\" x2=\"26\" y2=\"52\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"14\" y1=\"52\" x2=\"38\" y2=\"52\" stroke=\"#5a6376\" stroke-width=\"3\" fill=\"none\"/><line x1=\"26\" y1=\"50\" x2=\"26\" y2=\"30\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" marker-end=\"url(#ah2)\"/></svg>"}],"cardio":{"title":"🏃 HIIT caminadora","weeks":[{"week":"S1","detail":"25 min · 30/30 s"},{"week":"S2","detail":"30 min · 30/30 s"},{"week":"S3","detail":"30 min · 40/20 s"},{"week":"S4","detail":"30 min · constante"}]}},{"id":"d5","name":"DÍA 5 · Superior Mixto","exercises":[{"name":"A1. Press banca con mancuerna","video":"https://www.youtube.com/results?search_query=press+banca+con+mancuerna+t%C3%A9cnica+correcta","group":"Biserie 1","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Escápulas juntas, baja las mancuernas a la altura del pecho con codos a 45°, empuja sin arquear en exceso la espalda.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"26\" y2=\"34\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"34\" x2=\"26\" y2=\"20\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"20\" x2=\"26\" y2=\"8\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"54\" y2=\"34\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"34\" x2=\"54\" y2=\"20\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"20\" x2=\"54\" y2=\"8\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"A2. Press inclinado con mancuerna","video":"https://www.youtube.com/results?search_query=press+inclinado+con+mancuerna+t%C3%A9cnica+correcta","group":"Biserie 1","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Banco a 30-45°, baja controlado hasta sentir estiramiento en el pecho, sube sin chocar las mancuernas arriba.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"26\" y2=\"36\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"36\" x2=\"20\" y2=\"24\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"20\" y1=\"24\" x2=\"12\" y2=\"12\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"54\" y2=\"36\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"36\" x2=\"60\" y2=\"24\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"60\" y1=\"24\" x2=\"68\" y2=\"12\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"B1. Jalón al pecho agarre abierto","video":"https://www.youtube.com/results?search_query=jalon+al+pecho+agarre+abierto+t%C3%A9cnica+correcta","group":"Biserie 2","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Pecho arriba, lleva la barra hacia la parte alta del pecho llevando los codos hacia abajo y atrás, sin balancearte.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"26\" y2=\"14\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"14\" x2=\"20\" y2=\"4\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"54\" y2=\"14\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"54\" y1=\"14\" x2=\"60\" y2=\"4\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"30\" y2=\"40\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"50\" y2=\"40\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"},{"name":"B2. Remo en máquina","video":"https://www.youtube.com/results?search_query=remo+en+maquina+sentado+t%C3%A9cnica+correcta","group":"Biserie 2","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Pecho contra el soporte, tira llevando los codos atrás y juntando escápulas, evita usar impulso de la espalda.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"58\" y2=\"26\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"58\" y1=\"26\" x2=\"68\" y2=\"26\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><line x1=\"40\" y1=\"26\" x2=\"44\" y2=\"42\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"36\" y2=\"42\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"},{"name":"C1. Curl de bíceps con barra","video":"https://www.youtube.com/results?search_query=curl+de+biceps+con+barra+t%C3%A9cnica+correcta","group":"Biserie 3","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Codos pegados al torso, sube sin balancear la espalda, controla la bajada completa.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"50\" y2=\"44\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"44\" x2=\"50\" y2=\"30\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"44\" x2=\"50\" y2=\"26\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"C2. Extensión de tríceps con soga","video":"https://www.youtube.com/results?search_query=extension+de+triceps+con+soga+en+polea+t%C3%A9cnica+correcta","group":"Biserie 3","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Codos fijos al costado del cuerpo, extiende hacia abajo abriendo la soga al final, controla la vuelta.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"50\" y2=\"32\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"32\" x2=\"50\" y2=\"50\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"32\" x2=\"50\" y2=\"54\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"D1. Curl de bíceps con mancuerna","video":"https://www.youtube.com/results?search_query=curl+de+biceps+con+mancuerna+alterno+t%C3%A9cnica+correcta","group":"Biserie 4","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Codos pegados al torso, sube sin balancear el cuerpo, controla la bajada completa.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"50\" y2=\"44\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"44\" x2=\"50\" y2=\"30\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"44\" x2=\"50\" y2=\"26\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"},{"name":"D2. Extensión de tríceps en máquina","video":"https://www.youtube.com/results?search_query=extension+de+triceps+en+maquina+t%C3%A9cnica+correcta","group":"Biserie 4","weeks":[{"week":"S1","scheme":"4x10-12","rest":"90s"},{"week":"S2","scheme":"4x10","rest":"90s"},{"week":"S3","scheme":"4x8-10+Pp","rest":"90s"},{"week":"S4","scheme":"3x10-12","rest":"90s"}],"tip":"Codos fijos, extiende completo sin bloquear de golpe, controla la vuelta.","icon":"<svg viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"4.5\" markerHeight=\"4.5\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"#a78bfa\"/></marker></defs><circle cx=\"40\" cy=\"14\" r=\"6\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"46\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"31\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"46\" x2=\"49\" y2=\"70\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"40\" y1=\"26\" x2=\"50\" y2=\"32\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"32\" x2=\"50\" y2=\"50\" stroke=\"#ff3d6e\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"50\" y1=\"32\" x2=\"50\" y2=\"54\" stroke=\"#a78bfa\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/></svg>"}],"cardio":{"title":"🏃 HIIT caminadora","weeks":[{"week":"S1","detail":"25 min · 30/30 s"},{"week":"S2","detail":"30 min · 30/30 s"},{"week":"S3","detail":"30 min · 40/20 s"},{"week":"S4","detail":"30 min · constante"}]}}];
+const WEEKS = ["S1","S2","S3","S4"];
+const WEEK_LABEL = {S1:"Reactivación",S2:"Progresión",S3:"Intensidad",S4:"Descarga"};
+const SUGGEST_MULT = {S1:1,S2:1.05,S3:1.10,S4:0.90};
+const STORAGE_KEY = "workout-log-v1";
+
+let state = { currentWeek:"S1", currentDay:"d1", ex:{}, cardio:{}, bodyLog:[], bodyFormOpen:false, theme:"coral", themePanelOpen:false };
+let saveTimer = null;
+const runtimeTimers = {}; // key -> endTimestamp (ms). No se guarda, vive solo mientras la app está abierta.
+
+const THEMES = {
+  coral:   { accent: "#ff3d6e", ok: "#5eead4" },
+  lima:    { accent: "#84cc16", ok: "#22d3ee" },
+  azul:    { accent: "#3b82f6", ok: "#34d399" },
+  purpura: { accent: "#a855f7", ok: "#f472b6" }
+};
+
+function applyTheme(name){
+  const t = THEMES[name] || THEMES.coral;
+  document.documentElement.style.setProperty("--accent", t.accent);
+  document.documentElement.style.setProperty("--ok", t.ok);
+  document.querySelectorAll(".theme-swatch").forEach(s=>{
+    s.classList.toggle("active", s.dataset.theme === name);
+  });
+}
+
+// Sugerencia de peso inicial por tipo de movimiento, como % de tu peso corporal más reciente.
+// Es solo un punto de partida conservador — ajústalo según cómo te sientas en tu primera serie.
+const ARCHETYPE_FRACTION = {
+  push_horizontal: 0.18, push_incline: 0.15, push_vertical: 0.12,
+  pull_lat: 0.35, pull_row: 0.35,
+  fly_chest: 0.15, fly_rear: 0.10,
+  squat: 0.20, lunge: 0.10, leg_press: 0.55,
+  leg_extension: 0.22, leg_curl_seated: 0.18, leg_curl_lying: 0.18,
+  calf_raise: 0.35, hip_extension: 0.15, hip_abduction: 0.20, hip_adduction: 0.20,
+  bicep_curl: 0.09, tricep_pushdown: 0.10, tricep_overhead: 0.07, lateral_raise: 0.03,
+  crunch: 0, squat_iso: 0
+};
+
+function guessArchetype(exName){
+  const n = exName.toLowerCase();
+  if(n.includes("press banca") || n.includes("press inclinado")) return n.includes("inclinado") ? "push_incline" : "push_horizontal";
+  if(n.includes("press militar")) return "push_vertical";
+  if(n.includes("jalón")) return "pull_lat";
+  if(n.includes("remo")) return "pull_row";
+  if(n.includes("pec deck") || n.includes("apertura en máquina")) return "fly_chest";
+  if(n.includes("apertura posterior")) return "fly_rear";
+  if(n.includes("sentadilla") && n.includes("isométrica")) return "squat_iso";
+  if(n.includes("sentadilla")) return "squat";
+  if(n.includes("zancada")) return "lunge";
+  if(n.includes("prensa")) return "leg_press";
+  if(n.includes("cuádriceps")) return "leg_extension";
+  if(n.includes("femoral sentado")) return "leg_curl_seated";
+  if(n.includes("femoral acostado")) return "leg_curl_lying";
+  if(n.includes("pantorrilla")) return "calf_raise";
+  if(n.includes("cadera") || n.includes("glúteo") || n.includes("peso muerto")) return "hip_extension";
+  if(n.includes("abducción")) return "hip_abduction";
+  if(n.includes("aducción")) return "hip_adduction";
+  if(n.includes("curl de bíceps") || n.includes("curl bíceps")) return "bicep_curl";
+  if(n.includes("tríceps") && (n.includes("polea") || n.includes("soga") || n.includes("máquina"))) return "tricep_pushdown";
+  if(n.includes("tríceps") && n.includes("trasnuca")) return "tricep_overhead";
+  if(n.includes("lateral")) return "lateral_raise";
+  if(n.includes("crunch")) return "crunch";
+  return null;
+}
+
+function getLatestBodyweight(){
+  const log = [...state.bodyLog].filter(e=>e.weight!=null).sort((a,b)=> a.date < b.date ? -1 : 1);
+  return log.length ? log[log.length-1].weight : null;
+}
+
+function suggestedStartWeight(exName){
+  const bw = getLatestBodyweight();
+  const arche = guessArchetype(exName);
+  if(!bw || !arche) return null;
+  const frac = ARCHETYPE_FRACTION[arche];
+  if(!frac) return null;
+  return Math.round((bw * frac) / 2.5) * 2.5;
+}
+
+function beep(times){
+  times = times || 2;
+  try{
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    const ctx = new Ctx();
+    let t = ctx.currentTime;
+    for(let i=0;i<times;i++){
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = 880;
+      gain.gain.setValueAtTime(0.0001, t);
+      gain.gain.exponentialRampToValueAtTime(0.12, t + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(t); osc.stop(t + 0.25);
+      t += 0.32;
+    }
+  }catch(e){ /* audio no disponible */ }
+  try{ if(navigator.vibrate) navigator.vibrate(120); }catch(e){}
+}
+
+function parseRestSeconds(restStr){
+  const m = (restStr || "").match(/(\d+)/);
+  return m ? parseInt(m[1], 10) : 0;
+}
+
+function fmtClock(totalSeconds){
+  const s = Math.max(0, totalSeconds);
+  const mm = Math.floor(s / 60);
+  const ss = s % 60;
+  return mm + ":" + (ss < 10 ? "0" : "") + ss;
+}
+
+function startRestTimer(timerKey, seconds){
+  if(seconds <= 0) return;
+  runtimeTimers[timerKey] = Date.now() + seconds * 1000;
+  renderAll();
+}
+
+function cancelRestTimer(timerKey){
+  delete runtimeTimers[timerKey];
+  renderAll();
+}
+
+function tickTimers(){
+  let needsRerender = false;
+  Object.keys(runtimeTimers).forEach(key=>{
+    const remaining = Math.ceil((runtimeTimers[key] - Date.now()) / 1000);
+    const el = document.getElementById("rest-" + key);
+    if(remaining <= 0){
+      beep(2);
+      delete runtimeTimers[key];
+      needsRerender = true;
+      return;
+    }
+    if(el){
+      const timeEl = el.querySelector(".resttime");
+      if(timeEl) timeEl.textContent = fmtClock(remaining);
+    }
+  });
+  if(needsRerender) renderAll();
+}
+setInterval(tickTimers, 1000);
+
+function setsForScheme(scheme){
+  const m = scheme.match(/^(\d+)x/);
+  return m ? parseInt(m[1],10) : 3;
+}
+
+function roundToHalf(n){ return Math.round(n*2)/2; }
+
+function exKey(dayId, idx){ return dayId + "|" + idx; }
+
+function getExState(dayId, idx){
+  const key = exKey(dayId, idx);
+  if(!state.ex[key]){
+    state.ex[key] = { base:null, weights:{S1:null,S2:null,S3:null,S4:null}, custom:{S1:false,S2:false,S3:false,S4:false}, done:{S1:[],S2:[],S3:[],S4:[]} };
+  }
+  return state.ex[key];
+}
+
+function getCardioState(dayId){
+  if(!state.cardio[dayId]) state.cardio[dayId] = {S1:false,S2:false,S3:false,S4:false};
+  return state.cardio[dayId];
+}
+
+function suggestedWeight(exState, week){
+  if(exState.base == null) return null;
+  return roundToHalf(exState.base * SUGGEST_MULT[week]);
+}
+
+function displayWeight(exState, week){
+  if(week === "S1") return exState.base;
+  if(exState.weights[week] != null) return exState.weights[week];
+  return suggestedWeight(exState, week);
+}
+
+async function loadState(){
+  // Local (siempre disponible, sin internet) primero
+  let localValue = null;
+  try{ localValue = localStorage.getItem(STORAGE_KEY); }catch(e){}
+
+  let remoteValue = null;
+  try{
+    if(window.storage){
+      const res = await window.storage.get(STORAGE_KEY, false);
+      if(res && res.value) remoteValue = res.value;
+    }
+  }catch(e){ /* sin conexión: usamos el respaldo local */ }
+
+  const raw = remoteValue || localValue;
+  if(raw){
+    try{
+      const loaded = JSON.parse(raw);
+      state = Object.assign({currentWeek:"S1", currentDay:"d1", ex:{}, cardio:{}, bodyLog:[], bodyFormOpen:false, theme:"coral", themePanelOpen:false}, loaded);
+      if(!Array.isArray(state.bodyLog)) state.bodyLog = [];
+    }catch(e){}
+  }
+
+  // Carga única de tus dos registros históricos de bioimpedancia (no se repite si ya los tienes o los borraste)
+  if(!state.seededBodyLog){
+    state.bodyLog.push(
+      {id:"seed-20251222", date:"2025-12-22", weight:118.6, fat:37.01, muscle:42.09},
+      {id:"seed-20260303", date:"2026-03-03", weight:118.0, fat:37.97, muscle:40.7}
+    );
+    state.seededBodyLog = true;
+    scheduleSave();
+  }
+
+  applyTheme(state.theme);
+}
+
+function scheduleSave(){
+  if(saveTimer) clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>{
+    const json = JSON.stringify(state);
+    // Guardado local inmediato: funciona sin señal ni internet
+    try{ localStorage.setItem(STORAGE_KEY, json); }catch(e){ console.error("Local storage error", e); }
+    // Además, intenta sincronizar si hay conexión disponible
+    try{
+      if(window.storage){ window.storage.set(STORAGE_KEY, json, false).catch(()=>{}); }
+    }catch(e){}
+  }, 350);
+}
+
+function setsDoneCount(arr, total){
+  let c = 0;
+  for(let i=0;i<total;i++) if(arr[i]) c++;
+  return c;
+}
+
+function renderWeekSeg(){
+  const el = document.getElementById("weekseg");
+  el.innerHTML = "";
+  WEEKS.forEach(w=>{
+    const btn = document.createElement("button");
+    btn.className = "weekbtn " + w.toLowerCase() + (state.currentWeek===w ? " active":"");
+    btn.innerHTML = '<span class="wn">'+w+'</span><span class="wl">'+WEEK_LABEL[w]+'</span>';
+    btn.onclick = ()=>{ state.currentWeek = w; scheduleSave(); renderAll(); };
+    el.appendChild(btn);
+  });
+}
+
+function renderTabs(){
+  const el = document.getElementById("tabbar");
+  el.innerHTML = "";
+  PLAN.forEach((d,i)=>{
+    const shortName = d.name.split("·")[1] ? d.name.split("·")[1].trim() : d.name;
+    const btn = document.createElement("button");
+    btn.className = "tabbtn" + (state.currentDay===d.id ? " active":"");
+    btn.innerHTML = '<span class="n">'+(i+1)+'</span>'+shortName;
+    btn.onclick = ()=>{ state.currentDay = d.id; scheduleSave(); renderAll(); };
+    el.appendChild(btn);
+  });
+}
+
+function renderDayPanels(){
+  const container = document.getElementById("daypanels");
+  container.innerHTML = "";
+  const week = state.currentWeek;
+
+  PLAN.forEach(day=>{
+    const panel = document.createElement("div");
+    panel.className = "daypanel" + (state.currentDay===day.id ? " active":"");
+    panel.id = day.id;
+
+    let totalSets = 0, doneSets = 0;
+    day.exercises.forEach((ex,idx)=>{
+      const es = getExState(day.id, idx);
+      const wk = ex.weeks.find(w=>w.week===week);
+      const n = setsForScheme(wk.scheme);
+      totalSets += n;
+      doneSets += setsDoneCount(es.done[week]||[], n);
+    });
+
+    const daytitle = document.createElement("div");
+    daytitle.className = "daytitle";
+    daytitle.textContent = day.name;
+    panel.appendChild(daytitle);
+
+    const summary = document.createElement("div");
+    summary.className = "daysummary";
+    summary.innerHTML = '<div><div class="ds-txt">Series completadas · '+week+'</div><div class="ds-num">'+doneSets+' / '+totalSets+'</div></div>';
+    const resetBtn = document.createElement("button");
+    resetBtn.className = "resetbtn";
+    resetBtn.textContent = "Reiniciar " + week;
+    resetBtn.onclick = ()=>{
+      if(!confirm("¿Desmarcar todas las series de "+week+" en este día?")) return;
+      day.exercises.forEach((ex,idx)=>{
+        const es = getExState(day.id, idx);
+        const wk = ex.weeks.find(w=>w.week===week);
+        es.done[week] = new Array(setsForScheme(wk.scheme)).fill(false);
+      });
+      getCardioState(day.id)[week] = false;
+      scheduleSave();
+      renderAll();
+    };
+    summary.appendChild(resetBtn);
+    panel.appendChild(summary);
+
+    let lastGroup = null;
+    day.exercises.forEach((ex, idx)=>{
+      if(ex.group !== lastGroup){
+        lastGroup = ex.group;
+        if(ex.group){
+          const bl = document.createElement("div");
+          bl.className = "bl";
+          bl.textContent = ex.group;
+          panel.appendChild(bl);
+        }
+      }
+      panel.appendChild(renderExercise(day, idx, ex, week));
+    });
+
+    // cardio strip
+    const cardioWk = day.cardio.weeks.find(w=>w.week===week);
+    const cState = getCardioState(day.id);
+    const cardio = document.createElement("div");
+    cardio.className = "cardio-strip" + (cState[week] ? " on":"");
+    cardio.innerHTML = '<div class="cardio-title"><span>🏃 '+day.cardio.title+'</span></div><div class="cardio-detail">'+week+' · '+cardioWk.detail+'</div>';
+    const cbtn = document.createElement("button");
+    cbtn.className = "cardio-toggle" + (cState[week] ? " on":"");
+    cbtn.textContent = cState[week] ? "✓ Cardio hecho" : "Marcar cardio hecho";
+    cbtn.onclick = ()=>{
+      cState[week] = !cState[week];
+      scheduleSave();
+      renderAll();
+    };
+    cardio.appendChild(cbtn);
+    panel.appendChild(cardio);
+
+    container.appendChild(panel);
+  });
+}
+
+function renderExercise(day, idx, ex, week){
+  const es = getExState(day.id, idx);
+  const wk = ex.weeks.find(w=>w.week===week);
+  const n = setsForScheme(wk.scheme);
+  if(es.done[week].length !== n){
+    const prev = es.done[week];
+    es.done[week] = new Array(n).fill(false).map((v,i)=> prev[i] || false);
+  }
+  const allDone = es.done[week].length>0 && es.done[week].every(Boolean);
+
+  const block = document.createElement("div");
+  block.className = "exblock" + (allDone ? " done":"");
+
+  const head = document.createElement("div");
+  head.className = "exhead";
+  const nameDiv = document.createElement("div");
+  nameDiv.className = "exname";
+  nameDiv.innerHTML = '<span class="check">✓</span>' + ex.name;
+  head.appendChild(nameDiv);
+  if(ex.video){
+    const a = document.createElement("a");
+    a.className = "exvideo"; a.href = ex.video; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = "▶ Video";
+    head.appendChild(a);
+  }
+  block.appendChild(head);
+
+  if(ex.tip){
+    const tip = document.createElement("div");
+    tip.className = "extip";
+    const diagram = ex.icon ? '<div class="extip-diagram">'+ex.icon+'</div>' : '';
+    tip.innerHTML = diagram + '<div class="extip-text">'+ex.tip+'</div>';
+    block.appendChild(tip);
+  }
+
+  const chipsRow = document.createElement("div");
+  chipsRow.className = "wkchips";
+  ex.weeks.forEach(w=>{
+    const chip = document.createElement("div");
+    chip.className = "chip " + w.week.toLowerCase() + (w.week===week ? " current":"");
+    chip.innerHTML = '<div class="cs">'+w.week+'</div><div class="cv">'+w.scheme+'</div><div class="cr">'+w.rest+'</div>';
+    chipsRow.appendChild(chip);
+  });
+  block.appendChild(chipsRow);
+
+  const tracker = document.createElement("div");
+  tracker.className = "tracker";
+
+  const trackerHead = document.createElement("div");
+  trackerHead.className = "tracker-head";
+  trackerHead.innerHTML = '<span>Semana '+week+' · '+wk.scheme+' · descanso '+wk.rest+'</span>';
+  tracker.appendChild(trackerHead);
+
+  const weightRow = document.createElement("div");
+  weightRow.className = "weightrow";
+  const label = document.createElement("label");
+  label.textContent = week==="S1" ? "Peso base:" : "Peso:";
+  weightRow.appendChild(label);
+
+  const input = document.createElement("input");
+  input.type = "number";
+  input.step = "0.5";
+  input.min = "0";
+  input.inputMode = "decimal";
+  const dispVal = displayWeight(es, week);
+  const isSuggested = week!=="S1" && es.weights[week]==null && es.base!=null;
+  input.value = dispVal != null ? dispVal : "";
+  input.placeholder = "kg";
+  if(isSuggested) input.classList.add("suggested");
+
+  input.oninput = ()=>{ input.classList.remove("suggested"); };
+  input.onchange = ()=>{
+    const val = input.value === "" ? null : parseFloat(input.value);
+    if(week==="S1"){
+      es.base = val;
+    } else {
+      es.weights[week] = val;
+      es.custom[week] = val != null;
+    }
+    scheduleSave();
+    renderAll();
+  };
+  weightRow.appendChild(input);
+
+  const unit = document.createElement("span");
+  unit.className = "unit"; unit.textContent = "kg";
+  weightRow.appendChild(unit);
+
+  if(isSuggested){
+    const tag = document.createElement("span");
+    tag.className = "suggest-tag";
+    tag.textContent = "sugerido";
+    weightRow.appendChild(tag);
+  }
+
+  if(week==="S1" && es.base==null){
+    const startSuggest = suggestedStartWeight(ex.name);
+    if(startSuggest && startSuggest > 0){
+      const useBtn = document.createElement("button");
+      useBtn.className = "suggest-tag suggest-tag-btn";
+      useBtn.textContent = "Iniciar con " + startSuggest + "kg";
+      useBtn.onclick = ()=>{
+        es.base = startSuggest;
+        scheduleSave();
+        renderAll();
+      };
+      weightRow.appendChild(useBtn);
+    }
+  }
+  tracker.appendChild(weightRow);
+
+  const pills = document.createElement("div");
+  pills.className = "setpills";
+  const timerKey = day.id + "|" + idx + "|" + week;
+  const restSeconds = parseRestSeconds(wk.rest);
+  for(let i=0;i<n;i++){
+    const pill = document.createElement("div");
+    pill.className = "setpill" + (es.done[week][i] ? " on":"");
+    pill.innerHTML = '<span class="pn">Serie '+(i+1)+'</span>'+(es.done[week][i] ? "✓" : "○");
+    pill.onclick = ()=>{
+      const nowDone = !es.done[week][i];
+      es.done[week][i] = nowDone;
+      scheduleSave();
+      if(nowDone) startRestTimer(timerKey, restSeconds);
+      renderAll();
+    };
+    pills.appendChild(pill);
+  }
+  tracker.appendChild(pills);
+
+  if(runtimeTimers[timerKey]){
+    const remaining = Math.ceil((runtimeTimers[timerKey] - Date.now()) / 1000);
+    const restBox = document.createElement("div");
+    restBox.className = "restbox";
+    restBox.id = "rest-" + timerKey;
+    restBox.innerHTML = '<span>⏱ Descansando · <span class="resttime">'+fmtClock(remaining)+'</span></span>';
+    const cancelBtn = document.createElement("button");
+    cancelBtn.className = "restcancel";
+    cancelBtn.textContent = "Saltar";
+    cancelBtn.onclick = ()=> cancelRestTimer(timerKey);
+    restBox.appendChild(cancelBtn);
+    tracker.appendChild(restBox);
+  } else if(restSeconds > 0){
+    const startBtn = document.createElement("button");
+    startBtn.className = "reststart";
+    startBtn.textContent = "▶ Iniciar descanso (" + fmtClock(restSeconds) + ")";
+    startBtn.onclick = ()=> startRestTimer(timerKey, restSeconds);
+    tracker.appendChild(startBtn);
+  }
+
+  block.appendChild(tracker);
+  return block;
+}
+
+function sparkPoints(values){
+  if(values.length < 2) return "";
+  const min = Math.min(...values), max = Math.max(...values);
+  const range = (max - min) || 1;
+  const w = 100, h = 20, step = w / (values.length - 1);
+  return values.map((v,i)=>{
+    const x = i * step;
+    const y = h - ((v - min) / range) * h;
+    return x.toFixed(1) + "," + y.toFixed(1);
+  }).join(" ");
+}
+
+function fmtDate(iso){
+  const d = new Date(iso + "T00:00:00");
+  return d.toLocaleDateString("es-ES", {day:"2-digit", month:"short"});
+}
+
+function bstatBlock(label, unit, values, betterWhenLower, decimals){
+  if(values.length === 0){
+    return '<div class="bstat"><div class="lbl">'+label+'</div><div class="val">—</div></div>';
+  }
+  const last = values[values.length-1];
+  let deltaHtml = "";
+  if(values.length >= 2){
+    const prev = values[values.length-2];
+    const diff = last - prev;
+    const sign = diff > 0 ? "+" : "";
+    let cls = "flat";
+    if(Math.abs(diff) > 0.05){
+      const improved = betterWhenLower ? diff < 0 : diff > 0;
+      cls = improved ? "good" : "bad";
+    }
+    deltaHtml = '<div class="delta '+cls+'">'+sign+diff.toFixed(decimals)+'</div>';
+  }
+  const points = sparkPoints(values.slice(-8));
+  const sparkSvg = points ? '<svg class="spark" viewBox="0 0 100 20" preserveAspectRatio="none"><polyline points="'+points+'" fill="none" stroke="var(--accent)" stroke-width="2"/></svg>' : "";
+  return '<div class="bstat"><div class="lbl">'+label+'</div><div class="val">'+last.toFixed(decimals)+' '+unit+'</div>'+deltaHtml+sparkSvg+'</div>';
+}
+
+function fileToDataURL(file){
+  return new Promise((resolve, reject)=>{
+    const reader = new FileReader();
+    reader.onload = ()=> resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function compressImageFile(file, maxWidth){
+  maxWidth = maxWidth || 900;
+  return new Promise((resolve, reject)=>{
+    const img = new Image();
+    const reader = new FileReader();
+    reader.onload = (e)=>{
+      img.onload = ()=>{
+        const scale = Math.min(1, maxWidth / img.width);
+        const w = Math.round(img.width * scale);
+        const h = Math.round(img.height * scale);
+        const canvas = document.createElement("canvas");
+        canvas.width = w; canvas.height = h;
+        canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+        resolve({ data: canvas.toDataURL("image/jpeg", 0.72), type: "image/jpeg", name: file.name });
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function openFileViewer(dataUrl, type){
+  const overlay = document.createElement("div");
+  overlay.className = "fileviewer-overlay";
+  if(type === "application/pdf"){
+    overlay.innerHTML = '<div class="fileviewer-box"><button class="fileviewer-close">✕ Cerrar</button><embed src="'+dataUrl+'" type="application/pdf" class="fileviewer-pdf"></div>';
+  } else {
+    overlay.innerHTML = '<div class="fileviewer-box"><button class="fileviewer-close">✕ Cerrar</button><img src="'+dataUrl+'" class="fileviewer-img"></div>';
+  }
+  overlay.onclick = (e)=>{ if(e.target === overlay) document.body.removeChild(overlay); };
+  overlay.querySelector(".fileviewer-close").onclick = ()=> document.body.removeChild(overlay);
+  document.body.appendChild(overlay);
+}
+
+function renderBodyLog(){
+  const el = document.getElementById("bodylog");
+  const log = [...state.bodyLog].sort((a,b)=> a.date < b.date ? -1 : 1);
+
+  const weights = log.map(e=>e.weight).filter(v=>v!=null);
+  const fats = log.map(e=>e.fat).filter(v=>v!=null);
+  const muscles = log.map(e=>e.muscle).filter(v=>v!=null);
+
+  let html = '<div class="bodylog-head"><div><div class="bodylog-title">📊 Composición corporal</div><div class="bodylog-sub">Registra cada examen de bioimpedancia para ver tu evolución</div></div>';
+  html += '<button class="addbtn" id="toggleBodyForm">'+(state.bodyFormOpen ? "Cerrar" : "+ Nuevo registro")+'</button></div>';
+
+  html += '<div class="bodyform' + (state.bodyFormOpen ? " open":"") + '" id="bodyform">';
+  html += '<div class="field full"><label>Fecha</label><input type="date" id="bf-date"></div>';
+  html += '<div class="field"><label>Peso (kg)</label><input type="number" step="0.1" id="bf-weight" placeholder="kg"></div>';
+  html += '<div class="field"><label>Grasa corporal (%)</label><input type="number" step="0.1" id="bf-fat" placeholder="%"></div>';
+  html += '<div class="field full"><label>Músculo esquelético (kg)</label><input type="number" step="0.1" id="bf-muscle" placeholder="kg"></div>';
+  html += '<div class="field full"><label>Adjuntar examen (foto o PDF)</label><input type="file" accept="image/*,application/pdf" id="bf-file"></div>';
+  html += '<div class="field full" id="bf-file-preview"></div>';
+  html += '<button class="savebtn" id="bf-save">Guardar registro</button>';
+  html += '</div>';
+
+  if(log.length > 0){
+    html += '<div class="bodystats">';
+    html += bstatBlock("Peso", "kg", weights, true, 1);
+    html += bstatBlock("Grasa", "%", fats, true, 1);
+    html += bstatBlock("Músculo", "kg", muscles, false, 1);
+    html += '</div>';
+
+    html += '<div class="bodyhist">';
+    [...log].reverse().forEach(entry=>{
+      html += '<div class="bodyhist-row"><span class="bodyhist-date">'+fmtDate(entry.date)+'</span>';
+      html += '<span class="bodyhist-vals">';
+      if(entry.weight!=null) html += entry.weight.toFixed(1)+'kg';
+      if(entry.fat!=null) html += ' · '+entry.fat.toFixed(1)+'%';
+      if(entry.muscle!=null) html += ' · '+entry.muscle.toFixed(1)+'kg mm';
+      html += '</span>';
+      if(entry.fileData){
+        html += '<button class="viewfile" data-id="'+entry.id+'">📎</button>';
+      }
+      html += '<button class="delrow" data-id="'+entry.id+'">✕</button></div>';
+    });
+    html += '</div>';
+  } else if(!state.bodyFormOpen){
+    html += '<div class="bodyhist"><div class="bodyhist-empty">Todavía no hay registros. Agrega tu primer examen para empezar a ver tendencias.</div></div>';
+  }
+
+  el.innerHTML = html;
+
+  document.getElementById("toggleBodyForm").onclick = ()=>{
+    state.bodyFormOpen = !state.bodyFormOpen;
+    scheduleSave();
+    renderAll();
+  };
+
+  if(state.bodyFormOpen){
+    const dateInput = document.getElementById("bf-date");
+    dateInput.value = new Date().toISOString().slice(0,10);
+    let pendingFile = null; // {data, type, name}
+
+    const fileInput = document.getElementById("bf-file");
+    const preview = document.getElementById("bf-file-preview");
+    fileInput.onchange = async ()=>{
+      const file = fileInput.files[0];
+      if(!file) return;
+      preview.textContent = "Procesando archivo...";
+      try{
+        if(file.type.startsWith("image/")){
+          pendingFile = await compressImageFile(file);
+        } else if(file.type === "application/pdf"){
+          if(file.size > 3 * 1024 * 1024){
+            preview.textContent = "⚠️ El PDF pesa mucho (máx. 3MB). Prueba con una foto en su lugar.";
+            pendingFile = null;
+            return;
+          }
+          const data = await fileToDataURL(file);
+          pendingFile = { data, type: "application/pdf", name: file.name };
+        } else {
+          preview.textContent = "⚠️ Solo se aceptan imágenes o PDF.";
+          return;
+        }
+        preview.textContent = "✓ Archivo listo para guardar: " + file.name;
+      }catch(e){
+        preview.textContent = "⚠️ No se pudo procesar el archivo.";
+        pendingFile = null;
+      }
+    };
+
+    document.getElementById("bf-save").onclick = ()=>{
+      const date = dateInput.value;
+      const weight = document.getElementById("bf-weight").value;
+      const fat = document.getElementById("bf-fat").value;
+      const muscle = document.getElementById("bf-muscle").value;
+      if(!date || (!weight && !fat && !muscle && !pendingFile)){
+        alert("Ingresa al menos la fecha y un valor, o adjunta el examen.");
+        return;
+      }
+      const entry = {
+        id: Date.now().toString(36),
+        date: date,
+        weight: weight ? parseFloat(weight) : null,
+        fat: fat ? parseFloat(fat) : null,
+        muscle: muscle ? parseFloat(muscle) : null
+      };
+      if(pendingFile){
+        entry.fileData = pendingFile.data;
+        entry.fileType = pendingFile.type;
+        entry.fileName = pendingFile.name;
+      }
+      state.bodyLog.push(entry);
+      state.bodyFormOpen = false;
+      scheduleSave();
+      renderAll();
+    };
+  }
+
+  el.querySelectorAll(".viewfile").forEach(btn=>{
+    btn.onclick = ()=>{
+      const entry = state.bodyLog.find(e=>e.id === btn.dataset.id);
+      if(entry && entry.fileData) openFileViewer(entry.fileData, entry.fileType);
+    };
+  });
+
+  el.querySelectorAll(".delrow").forEach(btn=>{
+    btn.onclick = ()=>{
+      state.bodyLog = state.bodyLog.filter(e=>e.id !== btn.dataset.id);
+      scheduleSave();
+      renderAll();
+    };
+  });
+}
+
+function setupThemePanel(){
+  const panel = document.getElementById("themePanel");
+  panel.classList.toggle("open", state.themePanelOpen);
+  document.getElementById("themeBtn").onclick = ()=>{
+    state.themePanelOpen = !state.themePanelOpen;
+    scheduleSave();
+    renderAll();
+  };
+  panel.querySelectorAll(".theme-swatch").forEach(sw=>{
+    sw.onclick = ()=>{
+      state.theme = sw.dataset.theme;
+      applyTheme(state.theme);
+      scheduleSave();
+      renderAll();
+    };
+  });
+  applyTheme(state.theme);
+}
+
+function renderAll(){
+  setupThemePanel();
+  renderBodyLog();
+  renderWeekSeg();
+  renderTabs();
+  renderDayPanels();
+}
+
+if("serviceWorker" in navigator){
+  window.addEventListener("load", ()=>{
+    navigator.serviceWorker.register("sw.js").catch(()=>{});
+  });
+}
+
+(async function init(){
+  await loadState();
+  renderAll();
+})();
+</script>
+</body>
+</html>
